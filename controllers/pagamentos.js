@@ -4,4 +4,9 @@ module.exports = function(app) {
     res.send('OK.');
   });
 
+  app.post('/pagamentos/pagamento', function(req, res) {
+    var pagamento = req.body;
+    console.log(pagamento);
+    res.send('OK.');
+  });
 };
