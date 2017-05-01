@@ -5,6 +5,19 @@ module.exports = function(app) {
   });
 
   app.post('/pagamentos/pagamento', function(req, res) {
+
+    req.assert("forma_de_pagamento", "Forma de pagamento é obrigatória").notEmpty();
+    req.assert("valor", "Valor é obrigatório e deve ser decimal").notEmpty().isFloat();
+
+    var erros = req.validationErrors();
+
+    if(erros){
+      console.log('Erros de validação encontrados');
+      res.status(400).send(erros);
+      return;
+
+    }
+
     var pagamento = req.body;
     console.log('processando uma requisição de um novo pagamento');
     pagamento.status = 'CRIADO';
