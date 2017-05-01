@@ -9,6 +9,16 @@ module.exports = function(app) {
     console.log('processando uma requisição de um novo pagamento');
     pagamento.status = 'CRIADO';
     pagamento.data = new Date;
-    res.send(pagamento);
+
+    var connection = app.persistencia.connectionFactory();
+    var pagamentoDao = new app.persistencia.PagamentoDao(connection);
+
+    pagamentoDao.salva(pagamento, function(erro, resultado) {
+      console.log('pagamnto criado');
+      console.log(erro);
+      res.json(pagamento);
+    });
+
+
   });
 };

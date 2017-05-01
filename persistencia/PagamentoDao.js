@@ -13,3 +13,7 @@ PagamentoDao.prototype.lista = function(callback) {
 PagamentoDao.prototype.buscaPorId = function(id, callback) {
   this._connection.query('SELECT * FROM pagamentos WHERE id= ?', id, callback);
 }
+
+module.exports = function(){
+    return PagamentoDao;
+};
